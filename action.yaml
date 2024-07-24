@@ -33,6 +33,6 @@ runs:
           test -z "${{ inputs.config-file }}" || args="${args} --config-file ${{ inputs.config-file }}"
           test -z "${{ inputs.allow-dirty }}" || args="${args} --allow-dirty"
           
-          bump-my-version bump $args
+          bump-my-version bump $args ${{ inputs.method }}
           exitcode="$?"
           ([[ ${exitcode} -gt 0 ]] && echo "bumped=false" || echo "bumped=true") >> $GITHUB_OUTPUT
