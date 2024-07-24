@@ -1,0 +1,38 @@
+name: Bump My Version
+description: Bump version of a project
+inputs:
+  method:
+    description: 'Version bump method [major, minor, patch]'
+    required: false
+    default: 'patch'
+  config-file:
+    description: "Config file to read most of the variables from."
+    required: false
+  allow-dirty:
+    description: "Don't abort if working directory is dirty, or explicitly abort if dirty."
+    required: false
+outputs:
+  bumped:
+    description: 'Whether there was a bump or not [true|false]'
+    value: ${{ steps.bump.outputs.bumped }}
+runs:
+  using: 'composite'
+  steps:
+    - name: Install Python
+      uses: actions/setup-python@v5
+      with:
+        python-version: '3.12'
+    - name: Install bump-my-version
+      shell: bash
+      run: pip install "bump-my-version==0.24.3"
+    - name: Pass Inputs to Shell
+      id: bump
+      shell: bash
+      run: |
+          args=""
+          test -z "${{ inputs.config-file }}" || args="${args} --config-file ${{ inputs.config-file }}"
+          test -z "${{ inputs.allow-dirty }}" || args="${args} --allow-dirty"
+          
+          bump-my-version bump $args
+          exitcode="$?"
+          ([[ ${exitcode} -gt 0 ]] && echo "bumped=false" || echo "bumped=true") >> $GITHUB_OUTPUT
