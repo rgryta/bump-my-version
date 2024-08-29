@@ -15,5 +15,5 @@ jobs:
         env:
           BUMPVERSION_TAG: "true"
         with:
-          args: "patch"
+          args: "minor"
           github-token: ${{ secrets.GH_TOKEN }}
