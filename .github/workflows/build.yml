@@ -1,0 +1,16 @@
+name: Build
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout the code
+        uses: actions/checkout@v4
+
+      - name: Bump version
+        uses: callowayproject/bump-my-version@master
+        with:
+          args: "patch"
