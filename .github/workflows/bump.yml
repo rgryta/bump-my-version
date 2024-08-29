@@ -16,4 +16,4 @@ jobs:
           BUMPVERSION_TAG: "true"
         with:
           args: "patch"
-          # github-token: ${{ secrets.GH_TOKEN }}
+          github-token: ${{ secrets.GH_TOKEN }}
