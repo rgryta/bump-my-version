@@ -14,3 +14,4 @@ jobs:
         uses: rgryta/bump-my-version@action2
         with:
           args: "patch"
+          github-token: ${{ secrets.GH_TOKEN }}
