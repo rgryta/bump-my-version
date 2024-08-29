@@ -12,6 +12,8 @@ jobs:
 
       - name: Bump version
         uses: rgryta/bump-my-version@action2
+        env:
+          BUMPVERSION_TAG: "true"
         with:
           args: "patch"
-          github-token: ${{ secrets.GH_TOKEN }}
+          # github-token: ${{ secrets.GH_TOKEN }}
