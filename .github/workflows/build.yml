@@ -1,7 +1,9 @@
 name: Build
 
 on:
-  workflow_dispatch:
+  push:
+    tags:
+      - '**'
 
 jobs:
   build:
@@ -10,7 +12,6 @@ jobs:
       - name: Checkout the code
         uses: actions/checkout@v4
 
-      - name: Bump version
-        uses: callowayproject/bump-my-version@master
-        with:
-          args: "patch"
+      - name: Check
+        run: |
+          echo "Bumping version"
